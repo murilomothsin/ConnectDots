@@ -22,28 +22,37 @@ public class Tabuleiro {
 		for(int j = 0; j < this.tamanho; j++){
 			if(ch1 == letra){
 				if(ch3 == letra){
-					for(int i = 0; i < this.tamanho; i++){
-						if(coordenada1 == i+1){
-							if(coordenada2 == i){
-								if(j == 0)
-									q[i-1][j].setLados(0, jog);
-								else{
-									q[i-1][j].setLados(0, jog);
-									q[i-1][j-1].setLados(2, jog);
+					if ((ch4 - ch2) > 1) {
+						System.out.println("PONTO INVALIDO!!!");
+						return false;
+					}else {
+						for(int i = 0; i < this.tamanho; i++){
+							if(coordenada1 == i+1){
+								if(coordenada2 == i){
+									if(j == 0)
+										q[i-1][j].setLados(0, jog);
+									else{
+										q[i-1][j].setLados(0, jog);
+										q[i-1][j-1].setLados(2, jog);
+									}
+									return true;
+								}else if(coordenada2 == i+2){
+									if(j == 0)
+										q[i][j].setLados(0, jog);
+									else{
+										q[i][j].setLados(0, jog);
+										q[i][j-1].setLados(2, jog);
+									}
+									return true;
 								}
-								return true;
-							}else if(coordenada2 == i+2){
-								if(j == 0)
-									q[i][j].setLados(0, jog);
-								else{
-									q[i][j].setLados(0, jog);
-									q[i][j-1].setLados(2, jog);
-								}
-								return true;
 							}
 						}
 					}
 				}else if(ch3 == letra-1){
+					if (ch2 != ch4){
+						System.out.println("PONTO INVALIDO!!!");
+						return false;
+					}else {
 					for(int i = 0; i < this.tamanho; i++){
 						if(coordenada1 == i+1 && coordenada2 == i+1){
 							if(i == 0){
@@ -59,20 +68,27 @@ public class Tabuleiro {
 							}
 						}
 					}
+					}
+					
 				}else if(ch3 == letra+1){
-					for(int i = 0; i < this.tamanho; i++){
-						if(coordenada1 == i+1 && coordenada2 == i+1){
-							if(i == 0){
-								q[i][j].setLados(3, jog);
-								return true;
-							}else if(i == this.tamanho-1){
-								q[i][j].setLados(3, jog);
-								q[i-1][j].setLados(1, jog);
-								return true;
-							}else{
-								q[i-1][j].setLados(1, jog);
-								q[i][j].setLados(3, jog);
-								return true;
+					if (ch2 != ch4){
+						System.out.println("PONTO INVALIDO!!!");
+						return false;
+					}else {
+						for(int i = 0; i < this.tamanho; i++){
+							if(coordenada1 == i+1 && coordenada2 == i+1){
+								if(i == 0){
+									q[i][j].setLados(3, jog);
+									return true;
+								}else if(i == this.tamanho-1){
+									q[i][j].setLados(3, jog);
+									q[i-1][j].setLados(1, jog);
+									return true;
+								}else{
+									q[i-1][j].setLados(1, jog);
+									q[i][j].setLados(3, jog);
+									return true;
+								}
 							}
 						}
 					}
@@ -99,12 +115,17 @@ public class Tabuleiro {
 
 		char letra = 'A';
 		int limit = tamanho;
+		char jogadores[] = new char[limit];
 		boolean lado;
 		boolean vertical[] = new boolean[limit];
 		for(int j = 0; j < limit; j++){
 			for(int i = 0; i < limit; i++){
 				System.out.print(letra);
 				System.out.print(i+1);
+				if(q[i][j].getStatus())
+					jogadores[i] = q[i][j].getJogador().getLetraJogador();
+				else
+					jogadores[i] = ' ';
 				vertical[i] = q[i][j].getLado(3);
 				if(i == limit){
 					vertical[i] = q[i][j].getLado(1);
@@ -129,9 +150,9 @@ public class Tabuleiro {
 				System.out.println("");
 				for(int i = 0; i <limit; i++){
 					if(vertical[i]){
-						System.out.print(" |   ");
+						System.out.print(" | " + jogadores[i] + " ");
 					}else
-						System.out.print("    ");
+						System.out.print("  " + jogadores[i] + "  ");
 				}
 				System.out.println();
 			}

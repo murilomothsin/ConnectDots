@@ -22,8 +22,8 @@ public class Partida {
 		return nivel;
 	}
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	public void incrementaNivel() {
+		this.nivel++;
 	}
 	
 	public void reiniciaTabuleiro(){
