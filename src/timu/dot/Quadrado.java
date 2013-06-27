@@ -23,10 +23,6 @@ public class Quadrado {
 		return lados[i];
 	}
 	
-	public boolean[] getAllLados(){
-		return lados;
-	}
-	
 	public boolean setLados(int i, Jogador j){
 		boolean completo = true;
 		if(lados[i] == false){

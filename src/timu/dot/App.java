@@ -57,7 +57,6 @@ public class App {
 						System.out.println("Jogador " + partida.getJogador(x).getNome() + ": \n");
 						System.out.print("Origem: ");
 						texto = scanner.nextLine().toUpperCase();
-						
 					}while((texto.length() < 2) || (texto.isEmpty()));
 					char1origem = texto.charAt(0);
 					char2origem = texto.charAt(1);
