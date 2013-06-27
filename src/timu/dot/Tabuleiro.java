@@ -29,19 +29,42 @@ public class Tabuleiro {
 						for(int i = 0; i < this.tamanho; i++){
 							if(coordenada1 == i+1){
 								if(coordenada2 == i){
-									if(j == 0)
-										q[i-1][j].setLados(0, jog);
+									if(j == 0) {
+										if(!q[i-1][j].getLado(0)){
+											q[i-1][j].setLados(0, jog);
+										}
+										else{
+											System.out.println("PONTO INVALIDO!!!");
+											return false;
+										}
+									}
 									else{
-										q[i-1][j].setLados(0, jog);
-										q[i-1][j-1].setLados(2, jog);
+										if(!q[i-1][j].getLado(0) || !q[i-1][j-1].getLado(2)){
+											q[i-1][j].setLados(0, jog);
+											q[i-1][j-1].setLados(2, jog);
+										}else{
+											System.out.println("PONTO INVALIDO!!!");
+											return false;
+										}
 									}
 									return true;
 								}else if(coordenada2 == i+2){
-									if(j == 0)
-										q[i][j].setLados(0, jog);
+									if(j == 0){
+										if(!q[i][j].getLado(0))
+											q[i][j].setLados(0, jog);
+										else{
+											System.out.println("PONTO INVALIDO!!!");
+											return false;
+										}
+									}
 									else{
-										q[i][j].setLados(0, jog);
-										q[i][j-1].setLados(2, jog);
+										if(!q[i][j].getLado(0) || !q[i][j-1].getLado(2)){
+											q[i][j].setLados(0, jog);
+											q[i][j-1].setLados(2, jog);
+										}else{
+											System.out.println("PONTO INVALIDO!!!");
+											return false;
+										}
 									}
 									return true;
 								}
@@ -60,6 +83,7 @@ public class Tabuleiro {
 								return true;
 							}else if(i == this.tamanho-1){
 								q[i][j-1].setLados(3, jog);
+								q[i-1][j-1].setLados(1, jog);
 								return true;
 							}else{
 								q[i-1][j-1].setLados(1, jog);
@@ -78,16 +102,31 @@ public class Tabuleiro {
 						for(int i = 0; i < this.tamanho; i++){
 							if(coordenada1 == i+1 && coordenada2 == i+1){
 								if(i == 0){
-									q[i][j].setLados(3, jog);
-									return true;
+									if(!q[i][j].getLado(3)){
+										q[i][j].setLados(3, jog);
+										return true;
+									}else{
+										System.out.println("PONTO INVALIDO!!!");
+										return false;
+									}
 								}else if(i == this.tamanho-1){
-									q[i][j].setLados(3, jog);
-									q[i-1][j].setLados(1, jog);
-									return true;
+									if(!q[i][j].getLado(3) || !q[i-1][j].getLado(1)){
+										q[i][j].setLados(3, jog);
+										q[i-1][j].setLados(1, jog);
+										return true;
+									}else{
+										System.out.println("PONTO INVALIDO!!!");
+										return false;
+									}
 								}else{
+									if(!q[i-1][j].getLado(1) || !q[i][j].getLado(3)){
 									q[i-1][j].setLados(1, jog);
 									q[i][j].setLados(3, jog);
 									return true;
+									}else{
+										System.out.println("PONTO INVALIDO!!!");
+										return false;
+									}
 								}
 							}
 						}
@@ -96,6 +135,7 @@ public class Tabuleiro {
 			}
 			letra += 1;
 		}
+		System.out.println("PONTO INVALIDO!!!");
 		return false;
 	}
 	

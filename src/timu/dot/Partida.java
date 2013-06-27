@@ -11,7 +11,6 @@ public class Partida {
 		Jogadores.add(Jog1);
 		Jogadores.add(Jog2);
 		nivel = 1;
-		tabuleiro = new Tabuleiro(3);
 	}
 	
 	public Jogador getJogador(int i) {
@@ -26,19 +25,24 @@ public class Partida {
 		this.nivel++;
 	}
 	
-	public void reiniciaTabuleiro(){
+	public boolean reiniciaTabuleiro(){
 		int tam = 3;
-		if(nivel == 1){
+		switch (nivel) {
+		case 1:
 			tam = 3;
-		}
-		if(nivel == 2){
+		break;
+		case 2:
 			tam = 4;
-		}
-		if(nivel == 3){
+		break;
+		case 3:
 			tam = 5;
+		break;
+		default:
+			return false;
 		}
 		Tabuleiro tab = new Tabuleiro(tam);
 		tabuleiro = tab;
+		return true;
 	}
 
 	public Tabuleiro getTabuleiro() {

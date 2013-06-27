@@ -15,10 +15,6 @@ public class Jogador {
 		return Pontuacao;
 	}
 	
-	public void setPontuacao(int pontuacao) {
-		this.Pontuacao = pontuacao;
-	}
-	
 	public void aumentaPontos(){
 		Pontuacao++;
 	}
